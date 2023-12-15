@@ -102,7 +102,12 @@
 {{--                                wire:click="delete({{ $genre->id }})"--}}
 {{--                                wire:confirm="Are you sure you want to delete this genre?"--}}
                                 @click="$dispatch('swal:confirm', {
-                                    html: 'Delete {{ $genre->name }}?',
+                                    title: 'Delete {{ $genre->name }}?',
+                                    icon: '{{ $genre->records_count > 0 ? 'warning' : '' }}',
+                                    background: '{{ $genre->records_count > 0 ? 'error' : '' }}',
+                                    html: '{{ $genre->records_count > 0 ?
+                                        '<b>ATTENTION</b>: you are going to delete <b>' . $genre->records_count . ' ' . Str::plural('record', $genre->records_count) . '</b> at the same time!' :'' }}',
+                                    color: '{{ $genre->records_count > 0 ? 'red' : '' }}',
                                     cancelButtonText: 'NO!',
                                     confirmButtonText: 'YES DELETE THIS GENRE',
                                     next: {
