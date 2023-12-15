@@ -30,11 +30,16 @@ class Genres extends Component
         // validate the new genre name
         $this->validateOnly('newGenre');
         // create the genre
-        Genre::create([
+        $genre = Genre::create([
             'name' => trim($this->newGenre),
         ]);
         // reset $newGenre
         $this->resetValues();
+        // toast
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The genre <b><i>{$genre->name}</i></b> has been added",
+        ]);
     }
 
     public function resort($column)
