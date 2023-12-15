@@ -18,16 +18,30 @@ class Genres extends Component
         'required|min:3|max:30|unique:genres,name',
 //        as: 'name for this genre', OR
         attribute: 'name for this genre',
-
-
     )]
     public $newGenre;
+
+    #[Validate([
+        'editGenre.name' => 'required|min:3|max:30|unique:genres,name',
+    ], as: [
+        'editGenre.name' => 'name for this genre',
+    ])]
+    public $editGenre = ['id' => null, 'name' => null];
 
     // reset all the values and error messages
     public function resetValues()
     {
         $this->reset('newGenre');
         $this->resetErrorBag();
+    }
+
+    // copy the selected genre to $editGenre
+    public function edit(Genre $genre)
+    {
+        $this->editGenre = [
+            'id' => $genre->id,
+            'name' => $genre->name,
+        ];
     }
 
     // create a new genre
