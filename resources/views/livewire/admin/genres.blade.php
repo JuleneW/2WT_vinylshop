@@ -5,6 +5,9 @@
         <div class="p-4 flex justify-between items-start gap-4">
             <div class="relative w-64">
                 <x-input id="newGenre" type="text" placeholder="New genre"
+                         @keydown.enter="$el.setAttribute('disabled', true); $el.value = '';"
+                         @keydown.tab="$el.setAttribute('disabled', true); $el.value = '';"
+                         @keydown.esc="$el.setAttribute('disabled', true); $el.value = '';"
                          wire:model="newGenre"
                          wire:keydown.enter="create()"
                          wire:keydown.tab="create()"
@@ -96,8 +99,19 @@
                                 wire:click="edit({{ $genre->id }})"
                                 class="w-5 text-gray-300 hover:text-green-600"/>
                             <x-phosphor-trash-duotone
-                                wire:click="delete({{ $genre->id }})"
-                                wire:confirm="Are you sure you want to delete this genre?"
+{{--                                wire:click="delete({{ $genre->id }})"--}}
+{{--                                wire:confirm="Are you sure you want to delete this genre?"--}}
+                                @click="$dispatch('swal:confirm', {
+                                    html: 'Delete {{ $genre->name }}?',
+                                    cancelButtonText: 'NO!',
+                                    confirmButtonText: 'YES DELETE THIS GENRE',
+                                    next: {
+                                        event: 'delete-genre',
+                                        params: {
+                                            id: {{ $genre->id }}
+                                        }
+                                    }
+                                })"
                                 class="w-5 text-gray-300 hover:text-red-600"/>
                         </div>
                     @endif
@@ -110,6 +124,10 @@
                     <td>
                         <div class="flex flex-col text-left">
                             <x-input id="edit_{{ $genre->id }}" type="text"
+                                     x-init="$el.focus()"
+                                     @keydown.enter="$el.setAttribute('disabled', true);"
+                                     @keydown.tab="$el.setAttribute('disabled', true);"
+                                     @keydown.esc="$el.setAttribute('disabled', true);"
                                      wire:model="editGenre.name"
                                      wire:keydown.enter="update({{ $genre->id }})"
                                      wire:keydown.tab="update({{ $genre->id }})"
