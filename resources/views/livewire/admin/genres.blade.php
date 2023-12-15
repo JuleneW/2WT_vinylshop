@@ -44,12 +44,12 @@
             </colgroup>
             <thead>
             <tr class="bg-gray-100 text-gray-700 [&>th]:p-2 cursor-pointer">
-                <th>
+                <th wire:click="resort('id')">
                     <span data-tippy-content="Order by id">#</span>
                     <x-heroicon-s-chevron-up
                         class="w-5 text-slate-400 inline-block"/>
                 </th>
-                <th>
+                <th wire:click="resort('records_count')">
                 <span data-tippy-content="Order by # records">
                     <x-tmk.logo class="w-6 mx-auto fill-gray-200 inline-block"/>
                 </span>
@@ -57,7 +57,7 @@
                         class="w-5 text-slate-400 inline-block"/>
                 </th>
                 <th></th>
-                <th class="text-left">
+                <th wire:click="resort('name')" class="text-left">
                     <span data-tippy-content="Order by genre">Genre</span>
                     <x-heroicon-s-chevron-up
                         class="w-5 text-slate-400 inline-block"/>

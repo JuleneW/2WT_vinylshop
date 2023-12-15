@@ -13,6 +13,14 @@ class Genres extends Component
     public $orderBy = 'name';
     public $orderAsc = true;
 
+    public function resort($column)
+    {
+        $this->orderBy === $column ?
+            $this->orderAsc = !$this->orderAsc :
+            $this->orderAsc = true;
+        $this->orderBy = $column;
+    }
+
     #[Layout('layouts.vinylshop', ['title' => 'Genres', 'description' => 'Manage the genres of your vinyl records',])]
     public function render()
     {
