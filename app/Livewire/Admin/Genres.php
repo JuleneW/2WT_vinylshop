@@ -17,6 +17,13 @@ class Genres extends Component
     #[Validate('required|min:3|max:30|unique:genres,name')]
     public $newGenre;
 
+    // reset all the values and error messages
+    public function resetValues()
+    {
+        $this->reset('newGenre');
+        $this->resetErrorBag();
+    }
+
     // create a new genre
     public function create()
     {
@@ -26,6 +33,8 @@ class Genres extends Component
         Genre::create([
             'name' => trim($this->newGenre),
         ]);
+        // reset $newGenre
+        $this->resetValues();
     }
 
     public function resort($column)

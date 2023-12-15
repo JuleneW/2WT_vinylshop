@@ -7,6 +7,7 @@
                          wire:model="newGenre"
                          wire:keydown.enter="create()"
                          wire:keydown.tab="create()"
+                         wire:keydown.escape="resetValues()"
                          class="w-full shadow-md placeholder-gray-300"/>
                 <x-phosphor-arrows-clockwise
                     class="w-5 h-5 text-gray-200 absolute top-3 right-2 animate-spin"/>
