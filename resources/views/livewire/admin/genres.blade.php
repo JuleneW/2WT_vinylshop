@@ -65,10 +65,10 @@
             </tr>
             </thead>
             <tbody>
-
+            @foreach($genres as $genre)
             <tr class="border-t border-gray-300 [&>td]:p-2">
-                <td>...</td>
-                <td>...</td>
+                <td>{{ $genre->id }}</td>
+                <td>{{ $genre->records_count }}</td>
                 <td>
 
                     <div class="flex gap-1 justify-center [&>*]:cursor-pointer [&>*]:outline-0 [&>*]:transition">
@@ -79,10 +79,10 @@
                     </div>
                 </td>
                 <td
-                    class="text-left cursor-pointer">...
+                    class="text-left cursor-pointer">{{ $genre->name }}
                 </td>
             </tr>
-
+            @endforeach
             </tbody>
         </table>
     </x-tmk.section>
