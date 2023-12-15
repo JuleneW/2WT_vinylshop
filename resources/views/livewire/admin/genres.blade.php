@@ -4,6 +4,9 @@
         <div class="p-4 flex justify-between items-start gap-4">
             <div class="relative w-64">
                 <x-input id="newGenre" type="text" placeholder="New genre"
+                         wire:model="newGenre"
+                         wire:keydown.enter="create()"
+                         wire:keydown.tab="create()"
                          class="w-full shadow-md placeholder-gray-300"/>
                 <x-phosphor-arrows-clockwise
                     class="w-5 h-5 text-gray-200 absolute top-3 right-2 animate-spin"/>
@@ -47,20 +50,28 @@
                 <th wire:click="resort('id')">
                     <span data-tippy-content="Order by id">#</span>
                     <x-heroicon-s-chevron-up
-                        class="w-5 text-slate-400 inline-block"/>
+                        class="w-5 text-slate-400
+                            {{$orderAsc ?: 'rotate-180'}}
+                            {{$orderBy === 'id' ? 'inline-block' : 'hidden'}}
+                        "/>
                 </th>
                 <th wire:click="resort('records_count')">
                 <span data-tippy-content="Order by # records">
                     <x-tmk.logo class="w-6 mx-auto fill-gray-200 inline-block"/>
                 </span>
                     <x-heroicon-s-chevron-up
-                        class="w-5 text-slate-400 inline-block"/>
-                </th>
+                        class="w-5 text-slate-400
+                            {{$orderAsc ?: 'rotate-180'}}
+                            {{$orderBy === 'records_count' ? 'inline-block' : 'hidden'}}
+                        "/>                </th>
                 <th></th>
                 <th wire:click="resort('name')" class="text-left">
                     <span data-tippy-content="Order by genre">Genre</span>
                     <x-heroicon-s-chevron-up
-                        class="w-5 text-slate-400 inline-block"/>
+                        class="w-5 text-slate-400
+                            {{$orderAsc ?: 'rotate-180'}}
+                            {{$orderBy === 'name' ? 'inline-block' : 'hidden'}}
+                        "/>
                 </th>
             </tr>
             </thead>
