@@ -14,7 +14,13 @@ class Genres extends Component
     public $orderBy = 'name';
     public $orderAsc = true;
 
-    #[Validate('required|min:3|max:30|unique:genres,name')]
+    #[Validate(
+        'required|min:3|max:30|unique:genres,name',
+//        as: 'name for this genre', OR
+        attribute: 'name for this genre',
+
+
+    )]
     public $newGenre;
 
     // reset all the values and error messages
