@@ -1,5 +1,6 @@
 <div>
     <x-tmk.section
+        x-data="{ open: false }"
         class="p-0 mb-4 flex flex-col gap-2">
         <div class="p-4 flex justify-between items-start gap-4">
             <div class="relative w-64">
@@ -14,10 +15,13 @@
                     wire:target="create"
                     class="w-5 h-5 text-gray-500 absolute top-3 right-2 animate-spin"/>            </div>
             <x-heroicon-o-information-circle
+                @click="open = !open"
                 class="w-5 text-gray-400 cursor-help outline-0"/>
         </div>
         <x-input-error for="newGenre" class="m-4 -mt-4 w-full"/>
         <div
+            x-show="open"
+            x-transition
             style="display: none"
             class="text-sky-900 bg-sky-50 border-t p-4">
             <x-tmk.list type="ul" class="list-outside mx-4 text-sm">
