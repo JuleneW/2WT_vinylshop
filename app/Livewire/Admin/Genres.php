@@ -14,6 +14,16 @@ class Genres extends Component
     public $orderBy = 'name';
     public $orderAsc = true;
 
+    // delete a genre
+    public function delete(Genre $genre)
+    {
+        $genre->delete();
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The genre <b><i>{$genre->name}</i></b> has been deleted",
+        ]);
+    }
+
     #[Validate(
         'required|min:3|max:30|unique:genres,name',
 //        as: 'name for this genre', OR
