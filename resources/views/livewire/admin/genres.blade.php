@@ -10,8 +10,9 @@
                          wire:keydown.escape="resetValues()"
                          class="w-full shadow-md placeholder-gray-300"/>
                 <x-phosphor-arrows-clockwise
-                    class="w-5 h-5 text-gray-200 absolute top-3 right-2 animate-spin"/>
-            </div>
+                    wire:loading
+                    wire:target="create"
+                    class="w-5 h-5 text-gray-500 absolute top-3 right-2 animate-spin"/>            </div>
             <x-heroicon-o-information-circle
                 class="w-5 text-gray-400 cursor-help outline-0"/>
         </div>
