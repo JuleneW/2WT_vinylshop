@@ -11,6 +11,7 @@
 |
 */
 
+use App\Livewire\Admin\Genres;
 use App\Livewire\Admin\Records;
 use App\Livewire\Demo;
 use App\Livewire\Itunes;
