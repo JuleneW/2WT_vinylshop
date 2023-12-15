@@ -109,6 +109,9 @@
                         <div class="flex flex-col text-left">
                             <x-input id="edit_{{ $genre->id }}" type="text"
                                      wire:model="editGenre.name"
+                                     wire:keydown.enter="update({{ $genre->id }})"
+                                     wire:keydown.tab="update({{ $genre->id }})"
+                                     wire:keydown.escape="resetValues()"
                                      class="w-48"/>
                             <x-input-error for="editGenre.name" class="mt-2"/>
                         </div>
