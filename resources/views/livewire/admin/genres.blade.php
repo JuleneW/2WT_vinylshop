@@ -121,27 +121,29 @@
                         </div>
                     @endif
                 </td>
-                @if($editGenre['id'] !== $genre->id)
-                <td
-                    class="text-left cursor-pointer">{{ $genre->name }}
-                </td>
-                @else
-                    <td>
-                        <div class="flex flex-col text-left">
-                            <x-input id="edit_{{ $genre->id }}" type="text"
-                                     x-init="$el.focus()"
-                                     @keydown.enter="$el.setAttribute('disabled', true);"
-                                     @keydown.tab="$el.setAttribute('disabled', true);"
-                                     @keydown.esc="$el.setAttribute('disabled', true);"
-                                     wire:model="editGenre.name"
-                                     wire:keydown.enter="update({{ $genre->id }})"
-                                     wire:keydown.tab="update({{ $genre->id }})"
-                                     wire:keydown.escape="resetValues()"
-                                     class="w-48"/>
-                            <x-input-error for="editGenre.name" class="mt-2"/>
+                <td>
+                    @if($editGenre['id'] !== $genre->id)
+                        <div
+                            wire:click="edit({{ $genre->id }})"
+                            class="text-left cursor-pointer w-auto text-gray-700 hover:text-green-600">
+                            {{ $genre->name }}
                         </div>
-                    </td>
-                @endif
+                    @else
+                            <div class="flex flex-col text-left">
+                                <x-input id="edit_{{ $genre->id }}" type="text"
+                                         x-init="$el.focus()"
+                                         @keydown.enter="$el.setAttribute('disabled', true);"
+                                         @keydown.tab="$el.setAttribute('disabled', true);"
+                                         @keydown.esc="$el.setAttribute('disabled', true);"
+                                         wire:model="editGenre.name"
+                                         wire:keydown.enter="update({{ $genre->id }})"
+                                         wire:keydown.tab="update({{ $genre->id }})"
+                                         wire:keydown.escape="resetValues()"
+                                         class="w-48"/>
+                                <x-input-error for="editGenre.name" class="mt-2"/>
+                            </div>
+                    @endif
+                </td>
             </tr>
             @endforeach
             </tbody>
