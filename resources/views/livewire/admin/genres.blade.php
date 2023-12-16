@@ -16,7 +16,8 @@
                 <x-phosphor-arrows-clockwise
                     wire:loading
                     wire:target="create"
-                    class="w-5 h-5 text-gray-500 absolute top-3 right-2 animate-spin"/>            </div>
+                    class="w-5 h-5 text-gray-500 absolute top-3 right-2 animate-spin"/>
+            </div>
             <x-heroicon-o-information-circle
                 @click="open = !open"
                 class="w-5 text-gray-400 cursor-help outline-0"/>
@@ -129,7 +130,8 @@
                             {{ $genre->name }}
                         </div>
                     @else
-                            <div class="flex flex-col text-left">
+                        <div class="flex flex-col text-left">
+                            <div class="relative w-64">
                                 <x-input id="edit_{{ $genre->id }}" type="text"
                                          x-init="$el.focus()"
                                          @keydown.enter="$el.setAttribute('disabled', true);"
@@ -141,7 +143,12 @@
                                          wire:keydown.escape="resetValues()"
                                          class="w-48"/>
                                 <x-input-error for="editGenre.name" class="mt-2"/>
+                                <x-phosphor-arrows-clockwise
+                                    wire:loading
+                                    wire:target="update"
+                                    class="w-5 h-5 text-gray-500 absolute top-3 right-20 animate-spin"/>
                             </div>
+                        </div>
                     @endif
                 </td>
             </tr>
