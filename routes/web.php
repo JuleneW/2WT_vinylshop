@@ -37,8 +37,8 @@ Route::view('itunes',Itunes::class)->name('itunes');
 //    ]);
 //});
 // New version with prefix and group
-Route::middleware(['auth','admin','active'
-])->prefix('admin')
+Route::middleware(['auth','admin','active'])
+    ->prefix('admin')
     ->name('admin.')
     ->group(function () {
     Route::redirect('/', '/admin/records');

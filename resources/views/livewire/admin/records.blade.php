@@ -1,5 +1,5 @@
 <div>
-    {{-- Filter --}}
+     Filter
     <x-tmk.section class="mb-4 flex gap-2">
         <div class="flex-1">
             <x-input id="search" type="text" placeholder="Filter Artist Or Record"
@@ -25,7 +25,7 @@
         </x-button>
     </x-tmk.section>
 
-    {{-- Table with records --}}
+     Table with records
     <x-tmk.section>
         <div class="my-4">{{ $records->links() }}</div>
         <table class="text-center w-full border border-gray-300">
@@ -82,6 +82,8 @@
                             <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
                         </button>
                         <button
+                            wire:click="deleteRecord({{ $record->id }})"
+                            wire:confirm="Are you sure you want to delete this record?"
                             class="text-gray-400 hover:text-red-100 hover:bg-red-500 transition">
                             <x-phosphor-trash-duotone class="inline-block w-5 h-5"/>
                         </button>
@@ -100,14 +102,14 @@
         <div class="my-4">{{ $records->links() }}</div>
     </x-tmk.section>
 
-    {{-- Modal for add and update record --}}
+     Modal for add and update record
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h2>New record</h2>
+            <h2>{{ is_null($form->id) ? 'New record' : 'Edit record' }}</h2>
         </x-slot>
         <x-slot name="content">
-            {{-- error messages --}}
+{{--             error messages--}}
             @if ($errors->any())
                 <x-tmk.alert type="danger">
                     <x-tmk.list>
@@ -117,7 +119,7 @@
                     </x-tmk.list>
                 </x-tmk.alert>
             @endif
-            {{-- show only if $form->id is empty --}}
+{{--             show only if $form->id is empty--}}
             @if(!$form->id)
                 <form wire:submit="getDataFromMusicbrainzApi()">
                     <x-label for="mb_id" value="MusicBrainz id"/>
@@ -158,11 +160,18 @@
         </x-slot>
         <x-slot name="footer">
             <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
-            <x-tmk.form.button color="success"
-                               disabled="{{ $form->title ? 'false' : 'true' }}"
-                               wire:click="createRecord()"
-                               class="ml-2">Save new record
-            </x-tmk.form.button>
+            @if(is_null($form->id))
+                <x-tmk.form.button color="success"
+                                   disabled="{{ $form->title ? 'false' : 'true' }}"
+                                   wire:click="createRecord()"
+                                   class="ml-2">Save new record
+                </x-tmk.form.button>
+            @else
+                <x-tmk.form.button color="info"
+                                   wire:click="updateRecord({{ $form->id }})"
+                                   class="ml-2">Save changes
+                </x-tmk.form.button>
+            @endif
         </x-slot>
     </x-dialog-modal>
 </div>
