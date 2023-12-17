@@ -1,10 +1,15 @@
 <div>
      Filter
     <x-tmk.section class="mb-4 flex gap-2">
-        <div class="flex-1">
+        <div class="flex-1 relative">
             <x-input id="search" type="text" placeholder="Filter Artist Or Record"
                      wire:model.live.debounce.500ms="search"
                      class="w-full shadow-md placeholder-gray-300"/>
+            <button
+                @click="$wire.set('search', '')"
+                class="w-5 absolute right-4 top-3">
+                <x-phosphor-x/>
+            </button>
         </div>
         <x-tmk.form.switch id="noStock"
                            wire:model.live="noStock"

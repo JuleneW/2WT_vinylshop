@@ -6,14 +6,11 @@
             {{ $loading }}
         </x-tmk.preloader>
     </div>
-    {{-- filter section: artist or title, genre, max price and records per page --}}
+    {{-- Filter section --}}
     <div class="grid grid-cols-10 gap-4">
-{{--        <div class="col-span-10 md:col-span-5 lg:col-span-3">--}}
-            <div class="col-span-10 md:col-span-5 lg:col-span-3 flex flex-col">
+            <div class="col-span-10 md:col-span-5 lg:col-span-3">
             <x-label for="name" value="Filter"/>
-            <div
-{{--                class="relative">--}}
-                class="relative flex-1">
+            <div class="relative">
                 <x-input id="name" type="text"
                          wire:model.live.debounce.500ms="name"
                          class="block mt-1 w-full"

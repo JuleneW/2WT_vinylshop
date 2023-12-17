@@ -76,13 +76,6 @@ class RecordForm extends Form
         ]);
     }
 
-//    public function deleteCover()
-//    {
-//        $coverPath = 'covers/' . $this->mb_id . '.jpg';
-//        if (Storage::disk('public')->exists($coverPath))
-//            Storage::disk('public')->delete($coverPath);
-//    }
-    // delete the selected record
     public function delete(Record $record)
     {
         $record->delete();

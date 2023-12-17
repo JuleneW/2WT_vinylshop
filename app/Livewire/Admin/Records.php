@@ -75,6 +75,7 @@ class Records extends Component
 
     public function deleteRecord(Record $record)
     {
+//        $this->showModal = true;
         $this->form->delete($record);
         $this->dispatch('swal:toast', [
             'background' => 'success',
