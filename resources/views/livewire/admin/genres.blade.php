@@ -48,12 +48,14 @@
     </x-tmk.section>
 
     <x-tmk.section>
+        <div class="my-4">{{ $genres->links() }}</div>
         <table class="text-center w-full border border-gray-300">
             <colgroup>
                 <col class="w-14">
                 <col class="w-20">
                 <col class="w-16">
                 <col class="w-max">
+                <col class="w-20">
             </colgroup>
             <thead>
             <tr class="bg-gray-100 text-gray-700 [&>th]:p-2 cursor-pointer">
@@ -66,14 +68,15 @@
                         "/>
                 </th>
                 <th wire:click="resort('records_count')">
-                <span data-tippy-content="Order by # records">
-                    <x-tmk.logo class="w-6 mx-auto fill-gray-200 inline-block"/>
-                </span>
-                    <x-heroicon-s-chevron-up
-                        class="w-5 text-slate-400
-                            {{$orderAsc ?: 'rotate-180'}}
-                            {{$orderBy === 'records_count' ? 'inline-block' : 'hidden'}}
-                        "/>                </th>
+                    <span data-tippy-content="Order by # records">
+                        <x-tmk.logo class="w-6 mx-auto fill-gray-200 inline-block"/>
+                    </span>
+                        <x-heroicon-s-chevron-up
+                            class="w-5 text-slate-400
+                                {{$orderAsc ?: 'rotate-180'}}
+                                {{$orderBy === 'records_count' ? 'inline-block' : 'hidden'}}
+                            "/>
+                </th>
                 <th></th>
                 <th wire:click="resort('name')" class="text-left">
                     <span data-tippy-content="Order by genre">Genre</span>
@@ -82,6 +85,16 @@
                             {{$orderAsc ?: 'rotate-180'}}
                             {{$orderBy === 'name' ? 'inline-block' : 'hidden'}}
                         "/>
+                </th>
+                <th>
+                    <x-tmk.form.select id="perPage"
+                                       wire:model.live="perPage"
+                                       class="block mt-1 w-full">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </x-tmk.form.select>
                 </th>
             </tr>
             </thead>
@@ -155,5 +168,6 @@
             @endforeach
             </tbody>
         </table>
+        <div class="my-4">{{ $genres->links() }}</div>
     </x-tmk.section>
 </div>

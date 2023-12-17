@@ -8,12 +8,15 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Genres extends Component
 {
+    use WithPagination;
     // sort properties
     public $orderBy = 'name';
     public $orderAsc = true;
+    public $perPage = 5;
 
     // delete a genre
     #[On('delete-genre')]
@@ -109,7 +112,7 @@ class Genres extends Component
     {
         $genres = Genre::withCount('records')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-            ->get();
+            ->paginate($this->perPage);
         return view('livewire.admin.genres', compact('genres'));
     }
 }
