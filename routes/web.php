@@ -13,6 +13,9 @@
 
 use App\Livewire\Admin\Genres;
 use App\Livewire\Admin\Records;
+use App\Livewire\Admin\UsersAdvanced;
+use App\Livewire\Admin\UsersBasic;
+use App\Livewire\Admin\UsersExpert;
 use App\Livewire\Demo;
 use App\Livewire\Itunes;
 use App\Livewire\Shop;
@@ -44,6 +47,9 @@ Route::middleware(['auth','admin','active'])
     Route::redirect('/', '/admin/records');
     Route::get('genres', Genres::class)->name('genres');
     Route::get('records', Records::class)->name('records');
+    Route::get('users/basic', UsersBasic::class)->name('users.basic');
+    Route::get('users/advanced', UsersAdvanced::class)->name('users.advanced');
+    Route::get('users/expert', UsersExpert::class)->name('users.expert');
 });
 
 Route::middleware([
